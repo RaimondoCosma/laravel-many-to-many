@@ -70,14 +70,20 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.types.index' ? 'bg-secondary' : '' }}"
                                     href="{{ route('admin.types.index') }}">
-                                    <i class="fa-brands fa-r-project fa-lg fa-fw"></i>
+                                    <i class="fa-brands fa-bandcamp fa-lg fa-fw"></i>
                                     Tipologie
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.technologies.index' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('admin.technologies.index') }}">
+                                    <i class="fa-solid fa-microchip fa-lg fa-fw"></i>
+                                    Technologies
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </nav>
-
                 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                     @yield('content')
                 </main>

@@ -55,9 +55,11 @@ class ProjectController extends Controller
         $new_project = new Project();
         $new_project->fill($data);
         $new_project->slug = Str::slug($new_project->title);
-
-
         $new_project->save();
+
+        if(isset($data['technologies'])){
+            $new_project->technologies()->sync($data['technologies']);
+        }
 
         return redirect()->route('admin.projects.index')->with('message', "Il progetto '$new_project->title' è stato creato con successo!");
     }
@@ -84,8 +86,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
+        $technologies = Technology::all();
         
-        return view('admin.projects.edit', compact('project', 'types'));
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -115,6 +118,12 @@ class ProjectController extends Controller
         }
 
         $project->update($data);
+
+        if(isset($data['technologies'])){
+            $project->technologies()->sync($data['technologies']);
+        } else {
+            $project->technologies()->sync([]);
+        }
 
         return redirect()->route('admin.projects.index')->with('message', "Il progetto '$old_title' è stato aggiornato!");
 

@@ -76,6 +76,28 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
+            {{-- Utilizzo Checkbox --}}
+            <div class="mb-3">
+                <h4>Tecnologie Usate:</h4>
+                @foreach ($technologies as $technology)
+                    <div class="form-check form-check-inline">
+                        @if ($errors->any())
+                            <input class="form-check-input @error('technologies') is-invalid @enderror" type="checkbox"
+                                name="technologies[]" id="{{ $technology->slug }}" value="{{ $technology->id }}"
+                                {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}>
+                        @else
+                            <input class="form-check-input @error('technologies') is-invalid @enderror" type="checkbox"
+                                name="technologies[]" id="{{ $technology->slug }}" value="{{ $technology->id }}"
+                                {{ $project->technologies->contains($technology->id) ? 'checked' : '' }}>
+                        @endif
+                        <label class="form-check-label" for="{{ $technology->slug }}">{{ $technology->name }}</label>
+                    </div>
+                @endforeach
+                @error('technologies')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            {{-- /Utilizzo Checkbox --}}
             <button type="submit" class="btn btn-primary">Modifica</button>
         </form>
     </section>

@@ -14,6 +14,15 @@
             @else
                 <h3 class="text-center"><strong>Nessuna Tipologia</strong>
         @endif
+        @if ($project->technologies->isNotEmpty())
+            <h3>Technology</h3>
+            @foreach ($project->technologies as $technology)
+                <span class="badge text-bg-primary">{{ $technology->name }}</span>
+            @endforeach
+        @endif
+        <div class="my-4">
+
+        </div>
         <h3 class="mt-4">Descrizione progetto:</h3>
         <p>{{ $project->description }}</p>
         <h3 class="mt-4">Slug del progetto</h3>
